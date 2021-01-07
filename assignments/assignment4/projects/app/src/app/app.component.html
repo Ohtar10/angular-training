@@ -1,0 +1,5 @@
+<div class="content" role="main">
+  <app-likes [user-liked]="post.userLiked" [like-count]="post.likeCount" (like)="onLikeEvent($event)"></app-likes>
+  <span>{{ eventMessage }} </span>
+</div>
+

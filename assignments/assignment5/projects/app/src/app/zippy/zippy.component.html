@@ -1,0 +1,23 @@
+<div class="zippy">
+    <div class="zippy-heading" 
+    [ngClass]="{
+        'expanded': isExpanded,
+        '': !isExpanded
+    }"
+    (click)="toggle()">
+        {{ title }}
+        <span *ngIf="isExpanded" class="zippy-icon">
+            <svg class="bi" width="32" height="32" fill="currentColor">
+                <use xlink:href="assets/bootstrap-icons.svg#chevron-up"/>
+              </svg>
+        </span>
+        <span *ngIf="!isExpanded" class="zippy-icon">
+            <svg class="bi" width="32" height="32" fill="currentColor">
+                <use xlink:href="assets/bootstrap-icons.svg#chevron-down"/>
+              </svg>
+        </span>
+    </div>
+    <div *ngIf="isExpanded" class="zippy-body">
+        <ng-content></ng-content>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+name: angular-training
+channels:
+  - defaults
+dependencies:
+  - pip
+  - nodejs>=6.10.3
+
