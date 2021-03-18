@@ -25,6 +25,23 @@ ng serve
 ```
 The console should output the listening url , e.g.: http://localhost:4200/
 
+## Building an existing project
+In the repository, only the source code files will be submitted. It is necessary to build locally the project via:
+```
+ng build
+```
+It is common to face an issue the first time we do this as:
+```
+An unhandled exception occurred: Cannot find module '@angular-devkit/build-angular/package.json'
+```
+This is basically because the dev kit is not present in the folder and this is normal because that should not be part of the committed files anyway.
+
+To solve it, simply install the dependency with
+```
+npm install --save-dev @angular-devkit/build-angular
+```
+Then build again
+
 ## Angular Applications building blocks
 * Angular follows a 'component' architectural approach. The idea is to try to divide everything as a component, e.g., a navbar, sidebar, etc. A component might be composed of several sub-components, so the best is to build the application under reusable components.
 * It is also recommended to group several related pieces together under a 'module' umbrella. This is basically packaging several components and pieces of the application in modules to make easier to maintain the application.

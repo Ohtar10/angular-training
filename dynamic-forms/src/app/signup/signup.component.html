@@ -1,17 +1,40 @@
-<form action="">
-    <div class="form-group">
-        <label for="username">Username: </label>
-        <input type="text" 
-               name="username" 
-               id="username"
-               class="form-control">
+<!--Use formGroup directive to bind this form to the one defined in the component class-->
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">
+        The username or password is invalid
     </div>
-    <div class="form-group">
-        <label for="password">Password: </label>
-        <input type="password" 
-               name="password" 
-               id="password" 
-               class="form-control">
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username: </label>
+            <!--Use the formControlName property to bind this input control with the ones defined in our form group-->
+            <input 
+                formControlName="username"
+                type="text" 
+                name="username" 
+                id="username"
+                class="form-control">
+            <div *ngIf="username!.pending">Checking for uniqueness...</div>
+            <div *ngIf="username!.touched && username!.invalid" class="alert alert-danger">
+                <div *ngIf="username!.errors!.required">Username is required.</div>
+                <div *ngIf="username!.errors!.minlength">Username should be minimum {{ username!.errors!.minlength.requiredLength }}, current length is {{ username!.value.length }}.</div>
+                <div *ngIf="username!.errors!.shouldBeUnique">Username is already taken.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password: </label>
+            <input
+                formControlName="password"
+                type="password" 
+                name="password" 
+                id="password" 
+                class="form-control">
+            <div *ngIf="password!.touched && password!.invalid" class="alert alert-danger">
+                <div *ngIf="password!.errors!.required">Password is required.</div>
+                <div *ngIf="password!.errors!.minlength">Password should be minimum {{ password!.errors!.minlength.requiredLength }}, current length is {{ password!.value.length }}.</div>
+                <!-- <div *ngIf="password.errors.mustContainSpecialCharacters">Password must contain at least one special characters: "@, #, $, %, *, (, ), -, _" or spaces</div>-->
+                <div *ngIf="password!.errors!.mustContainSpecialCharacters">Password must contain at least one special characters: {{ password!.errors!.mustContainSpecialCharacters.specialCharacters }}</div>
+            </div>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Sign up</button>
 </form>
