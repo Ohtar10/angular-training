@@ -1,0 +1,57 @@
+
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">
+        There is a problem with the provided info. Please review.
+        <div *ngIf="form.errors.invalidData">The user information provided is invalid.</div>
+    </div>
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username: </label>
+            <input type="text" 
+                   class="form-control"
+                   name="username"
+                   id="username"
+                   formControlName="username">
+        </div>
+        <div *ngIf="username!.touched && username!.invalid" class="alert alert-danger">
+            <div *ngIf="username!.errors!.required">Username is required</div>
+        </div>
+        <div class="form-group">
+            <label for="currentpass">Current Password: </label>
+            <input type="password"
+                   class="form-control"
+                   name="currentpass"
+                   id="currentpass"
+                   formControlName="currentpass">
+        </div>
+        <div *ngIf="currentpass!.touched && currentpass!.invalid" class="alert alert-danger">
+            <div *ngIf="currentpass!.errors!.required">Current password is required</div>
+        </div>
+        <div class="form-group">
+            <label for="newpass">New Password: </label>
+            <input type="password" 
+                   class="form-control"
+                   name="newpass"
+                   id="newpass"
+                   formControlName="newpass">
+        </div>
+        <div *ngIf="newpass!.touched && newpass!.invalid" class="alert alert-danger">
+            <div *ngIf="newpass!.errors!.required">New password is required</div>
+        </div>
+        <div class="form-group">
+            <label for="confirmnewpass">Confirm New Password: </label>
+            <input type="password"
+                   class="form-control"
+                   name="confirmnewpass"
+                   id="confirmnewpass"
+                   formControlName="confirmnewpass">
+        </div>
+        <div *ngIf="confirmnewpass!.touched && confirmnewpass!.invalid" class="alert alert-danger">
+            <div *ngIf="confirmnewpass!.errors!.required">New password confirmation is required</div>
+        </div>
+        <div *ngIf="account.errors && account.errors.passwordsShouldMatch" class="alert alert-danger">
+            The new password and the confirmation should match.
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Change Password</button>
+</form>
