@@ -71,7 +71,7 @@ ng generate service service_name
 ```
 
 ### Creating pipes
-Pipes are usefult for transforming data before displaying in in the web page. Pipes are similar to components and services. We can generate them with Angular CLI.
+Pipes are useful for transforming data before displaying in in the web page. Pipes are similar to components and services. We can generate them with Angular CLI.
 ```
 ng generate pipe pipe_name
 ```
@@ -88,5 +88,6 @@ The flag `--save` automatically adds this dependency to the package.json file of
 * [Displaying & Handling Events](./assignments/assignment2): Displaying data comming from component classes and handling events like click or value changes. It also includes installing bootstrap as a dependency and using it.
 * [Building Pipes](./assignments/assignment3): It contains pipe example in which a user input is automatically title cased.
 * [Building Components](./assignments/assignment4): Creating a new we component from scratch and binding properties to the html so they get automatically updated.
-* [Directives](./assignments/assignments5): It has a more complex component example including input and output properties and how can be used from other html pages or components. There are several directive examples here depending of the situation.
-* [Template-Driven Forms](./assignments/assignments6): Example of a form mostly managed from the html template using directives. It includes data validation and error message display.
+* [Directives](./assignments/assignment5): It has a more complex component example including input and output properties and how can be used from other html pages or components. There are several directive examples here depending of the situation.
+* [Template-Driven Forms](./assignments/assignment6): Example of a form mostly managed from the html template using directives. It includes data validation and error message display.
+* [Reactive Forms](./assignments/assignment7): Example of a form managed and dynamically generated from a component class.
