@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppError } from '../common/app-error';
+import { BadInput } from '../common/bad-input';
+import { NotFoundError } from '../common/not-found-error';
 import { PostService } from '../services/post.service';
 
 @Component({
@@ -9,7 +12,6 @@ import { PostService } from '../services/post.service';
 export class PostsComponent implements OnInit {
 
   posts: any[];
-  private url: string = 'https://jsonplaceholder.typicode.com/posts';
 
   constructor(private service: PostService) { 
     
@@ -17,8 +19,13 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getPosts()
-      .subscribe(response => {
+      .subscribe(
+        response => {
           this.posts = response as any[]; 
+      }, 
+        error => {
+        alert('An unexpected error occurred.');
+        console.log(error);
       });
   }
 
@@ -26,11 +33,17 @@ export class PostsComponent implements OnInit {
     let post = {title: input.value};
     input.value = "";
     this.service.createPost(post)
-      .subscribe(response => {
+      .subscribe(
+        response => {
         post['id'] = response['id'];
         this.posts.splice(0, 0, post);
         console.log(post);
-      });
+      },
+        (error: AppError) => {
+          if (error instanceof BadInput) {
+            alert(`Error creating post: ${error.originalError}`);
+          }
+        });
     
   }
 
@@ -43,10 +56,19 @@ export class PostsComponent implements OnInit {
 
   deletePost(post) {
     this.service.deletePost(post.id)
-    .subscribe(response => {
+    .subscribe(
+      response => {
       let index = this.posts.indexOf(post);
       this.posts.splice(index, 1);
-    });
+    },
+      (error: AppError) => {
+        if (error instanceof NotFoundError)
+          alert("This post has already been deleted");
+        else {
+          alert('An unexpected error occurred.');
+          console.log(error);
+        }
+      });
   }
 
 }

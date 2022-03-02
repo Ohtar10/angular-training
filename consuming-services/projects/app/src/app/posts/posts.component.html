@@ -3,10 +3,20 @@ type="text" class="form-control">
 <ul class="list-group">
     <li class="list-group-item"
         *ngFor="let post of posts">
-        <button (click)="updatePost(post)"
-        class="btn btn-primary btn-sm">Update</button>
-        <button (click)="deletePost(post)"
-        class="btn btn-danger btn-sm">Delete</button>
-        {{ post.title }}
+        <div class="container">
+            <div class="row">
+                <div class="col-1">
+                    <button (click)="updatePost(post)"
+                        class="btn btn-primary btn-sm">Update</button>
+                </div>
+                <div class="col-1">
+                    <button (click)="deletePost(post)"
+                        class="btn btn-danger btn-sm">Delete</button>
+                </div>
+                <div class="col-lg">
+                    {{ post.title }}
+                </div>
+            </div>
+        </div>
     </li>
 </ul>
