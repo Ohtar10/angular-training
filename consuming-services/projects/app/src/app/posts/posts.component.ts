@@ -18,21 +18,22 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getPosts()
+    this.service.getAll()
       .subscribe(
         response => {
           this.posts = response as any[]; 
-      }, 
-        error => {
-        alert('An unexpected error occurred.');
-        console.log(error);
-      });
+      // }, --> this is no longer needed here thanks to the AppErrorHandler 
+      //   error => {
+      //   alert('An unexpected error occurred.');
+      //   console.log(error);
+      // });
+    });
   }
 
   createPost(input: HTMLInputElement): void {
     let post = {title: input.value};
     input.value = "";
-    this.service.createPost(post)
+    this.service.create(post)
       .subscribe(
         response => {
         post['id'] = response['id'];
@@ -43,19 +44,20 @@ export class PostsComponent implements OnInit {
           if (error instanceof BadInput) {
             alert(`Error creating post: ${error.originalError}`);
           }
+          else throw error; //Rethrow if not expected to let AppErrorHandler to handle it
         });
     
   }
 
   updatePost(post) {
-    this.service.updatePost(post)
+    this.service.update(post)
     .subscribe(response => {
       console.log(response);
     });
   }
 
   deletePost(post) {
-    this.service.deletePost(post.id)
+    this.service.delete(post.id)
     .subscribe(
       response => {
       let index = this.posts.indexOf(post);
@@ -64,10 +66,7 @@ export class PostsComponent implements OnInit {
       (error: AppError) => {
         if (error instanceof NotFoundError)
           alert("This post has already been deleted");
-        else {
-          alert('An unexpected error occurred.');
-          console.log(error);
-        }
+        else throw error;
       });
   }
 
