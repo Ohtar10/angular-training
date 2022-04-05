@@ -15,6 +15,14 @@
         {
             "type": "pwa-chrome",
             "request": "launch",
+            "name": "Assignment 9",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/assignments/assignment9/projects/app",
+            "sourceMaps": true
+        },
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
             "name": "Consuming Services",
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}/consuming-services/projects/app",
