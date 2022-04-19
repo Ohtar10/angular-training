@@ -1,0 +1,31 @@
+<form #f="ngForm" (ngSubmit)="showFollowers(f.value)">
+    <div class="container-sm">
+        <div class="row">
+                <div class="col-4">
+                    <input ngModeltype="text" ngModel name="user" id="user" #user="ngModel" class="form-control">
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-primary btn-sm">Search</button>
+                </div>
+        </div>
+    </div>
+</form>
+<div class="container-sm">
+    <div class="row">
+        <div class="col-5">
+            <div class="d-flex align-items-center" *ngFor="let follower of followers">
+                <div class="flex-shrink-0">
+                  <img src="{{ follower.avatar_url }}" alt="{{ follower.login}}" class="img-thumbnail user-avatar">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <div class="fw-bold">
+                        <h3>
+                            <a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a>
+                        </h3>
+                    </div>
+                    <a href="{{ follower.html_url}}" class="link-primary">{{ follower.html_url}}</a>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
