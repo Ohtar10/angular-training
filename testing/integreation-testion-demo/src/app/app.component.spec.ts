@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,7 +12,7 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, NavComponent
       ],
     }).compileComponents();
   });
@@ -32,4 +35,12 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain('integreation-testion-demo app is running!');
   });
+
+  it('should have a router outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    let de = fixture.debugElement.query(By.directive(RouterOutlet));
+    expect(de).not.toBeNull();
+  });
+
+  
 });

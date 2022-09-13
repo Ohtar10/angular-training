@@ -1,7 +1,11 @@
 
 import { HttpClient } from '@angular/common/http';
-import {from} from 'rxjs';
+import { Injectable } from '@angular/core';
+import {from, firstValueFrom} from 'rxjs';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class TodoService { 
   constructor(private http?: HttpClient) { 
   }
@@ -18,9 +22,12 @@ export class TodoService {
     return from([]);
   }
 
-  // getTodosPromise() {
-  //   return this.http.get('...').map(r => r.json()).toPromise();
-  // }
+  getTodosPromise(): Promise<Object> {
+    if (this.http)
+      // return this.http.get('...').map(r => r.json()).toPromise();
+      return firstValueFrom(this.http.get('...'));
+    return Promise.resolve([]);
+  }
 
   delete(id: any) {
     if (this.http)
